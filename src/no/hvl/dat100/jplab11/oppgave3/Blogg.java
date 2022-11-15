@@ -5,46 +5,97 @@ import no.hvl.dat100.jplab11.oppgave1.*;
 
 public class Blogg {
 
-	// TODO: objektvariable 
+	Innlegg[] inleggtabell;
+	protected int nesteledig;
 
 	public Blogg() {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		inleggtabell = new Innlegg[20];
 	}
 
 	public Blogg(int lengde) {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		inleggtabell = new Innlegg[lengde];
 	}
 
 	public int getAntall() {
-		throw new UnsupportedOperationException(TODO.method());
+		return nesteledig;
 	}
 	
 	public Innlegg[] getSamling() {
-		throw new UnsupportedOperationException(TODO.method());
-
+		return inleggtabell;
 	}
 	
 	public int finnInnlegg(Innlegg innlegg) {
+		
+		int posisjon = -1;
 
-		throw new UnsupportedOperationException(TODO.method());
+		for (int i = 0; i < nesteledig; i++) {
+			
+		    if (inleggtabell[i].erLik(innlegg)) {
+		    	posisjon = i;
+		    }
+		    else {i++;}			
+		}
+		return posisjon;
 	}
 
 	public boolean finnes(Innlegg innlegg) {
-		throw new UnsupportedOperationException(TODO.method());
+		
+		boolean finnes = false;
+		
+        for (int i = 0; i < nesteledig; i++) {
+			
+		    if (inleggtabell[i].erLik(innlegg)) {
+		    	return true;
+		    }
+		    else {		  	
+		    i++;
+		    }		   
+		}
+        return finnes;
 	}
 
 	public boolean ledigPlass() {
-		throw new UnsupportedOperationException(TODO.method());
-
+			    		    
+	    if (nesteledig < inleggtabell.length) {	    	
+	    	return true;	    	
+	    }
+	        else {
+	    	 return false;
+	        }
+	    
 	}
 	
 	public boolean leggTil(Innlegg innlegg) {
-
-		throw new UnsupportedOperationException(TODO.method());
+		
+	boolean ny = true;	
+		
+	if (finnes(innlegg)) {ny = false;}			
+		
+	if (ledigPlass() && ny) {
+		
+	   inleggtabell[nesteledig] = innlegg;		
+		nesteledig++;
+		return true;
+	}
+	else {
+		return false;
+	}
+			
 	}
 	
 	public String toString() {
-		throw new UnsupportedOperationException(TODO.method());
+		
+	int antallInlegg = nesteledig;
+	
+	String print = antallInlegg + "\n";
+	
+	for(int i = 0; i < nesteledig; i++) {
+		
+		print += inleggtabell[i].toString();
+	}
+	
+	return print;
+			
 	}
 
 	// valgfrie oppgaver nedenfor
